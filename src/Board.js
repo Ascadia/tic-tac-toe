@@ -5,7 +5,6 @@ import { calculateWinner } from "./helperFunctions";
 function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
-  const [winnerStatus, setWinnerStatus] = useState(null);
 
   const handleClick = (i) => {
     const newSquares = [...squares];
@@ -22,15 +21,16 @@ function Board() {
   );
 
   const winner = calculateWinner(squares);
+  let status;
   if (winner) {
-    setWinnerStatus(`Winner: ${winner}`);
+    status = "Winner: " + winner;
   } else {
-    setWinnerStatus(`Next player: ${xIsNext ? "X" : "O"}`);
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
     <div>
-      <div className="status">{winnerStatus}</div>
+      <div className="status">{status}</div>
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
